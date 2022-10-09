@@ -83,7 +83,7 @@
     position: relative;
   }
   #note-title {
-    display: block;
+    display: none;
     width: calc(100% - 10px);
     min-height: 43px;
     margin: 0 5px;
@@ -95,7 +95,7 @@
   }
 
   #form-buttons {
-    display: block;
+    display: none;
     text-align: right;
   }
 
