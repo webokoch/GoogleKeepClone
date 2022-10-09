@@ -22,6 +22,7 @@
     max-width: 900px;
   }
 
+  /* --- Header --- */
   header {
     display: flex;
     align-items: center;
@@ -39,3 +40,90 @@
     padding-top: 4px;
     padding-left: 4px;
   }
+
+  /* --- Form --- */
+  #form-container {
+    border-radius: 8px;
+    border: 0.5px solid #d3d3d3;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
+      0 2px 6px 2px rgba(60, 64, 67, 0.149);
+    margin: 32px auto 16px auto;
+    max-width: 496px;
+    transition-duration: 0.218s;
+    transition-property: background, border, opacity, box-shadow, transform;
+    transition-timing-function: ease-in;
+  }
+
+  #form {
+    position: relative;
+    border: none;
+    margin: 1px;
+    border-radius: 8px;
+    transition-duration: 0.218s;
+    transition-property: background, border, opacity, box-shadow, transform;
+    transition-timing-function: ease-in;
+  }
+  
+  .form-open {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  #note-text {
+    width: calc(100% - 10px);
+    min-height: 43px;
+    margin: 0 5px;
+    padding: 10px 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    /* box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); */
+    letter-spacing: 0.00625em;
+    border: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  #note-title {
+    display: block;
+    width: calc(100% - 10px);
+    min-height: 43px;
+    margin: 0 5px;
+    padding: 10px 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    border: 0;
+  }
+
+  #form-buttons {
+    display: block;
+    text-align: right;
+  }
+
+#submit-button,
+#form-close-button {
+  margin: 0.2em 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.87);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.01785714em;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  height: 36px;
+  padding: 8px 24px;
+  border-radius: 4px;
+  border-color: transparent !important;
+  background-color: rgb(251, 251, 251);
+}
+
+#submit-button {
+  color: #fff;
+  background-color: #007bff;
+}
+
+#submit-button:hover,
+#form-close-button:hover {
+  filter: brightness(95%);
+}
