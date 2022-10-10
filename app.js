@@ -77,8 +77,8 @@ class App {
             <div class="note-text">${note.text}</div>
             <div class="toolbar-container">
                 <div class="toolbar">
-                <i class="fa-solid fa-palette"></i>
-                <i class="fa-solid fa-trash"></i>
+                <img class="toolbar=color" src="https://img.icons8.com/external-glyphons-amoghdesign/32/000000/external-color-education-vol-02-glyphons-amoghdesign.png"/>
+                <img class="toolbar-delete" src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png"/>
                 </div>
             </div>
             </div>
