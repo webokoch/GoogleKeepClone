@@ -8,6 +8,7 @@ class App {
         this.$notes = document.querySelector("#notes-container");
         this.$placeholder = document.querySelector("#placeholder");
         this.$formButtons = document.querySelector("#form-buttons")
+        this.$formCloseButton = document.querySelector("#form-close-button")
   
       this.addEventListeners()
     }
@@ -27,13 +28,24 @@ class App {
           this.addNote({ title, text })
         }
       });
+
+      this.$formButtons.addEventListener("click", (event) => {
+        event.stopPropagation()
+        this.closeForm()
+      })
     }
   
     handleFormClick(event) {
       const isFormClicked = this.$form.contains(event.target)
         
+      const title = this.$noteTitle.value  
+      const text = this.$noteText.value   
+      const hasNote = title && text
+
       if (isFormClicked) {
         this.openForm()
+      } else if (hasNote) {
+        this.addNote({ title, text })
       } else {
         this.closeForm()
       }
@@ -73,7 +85,7 @@ class App {
         .map(
             note => `
             <div style="background: ${note.color};" class="note">
-            <div class="${note.title && "note-title"}">${note.title}</div>
+            <div class="note-title">${note.title}</div>
             <div class="note-text">${note.text}</div>
             <div class="toolbar-container">
                 <div class="toolbar">
