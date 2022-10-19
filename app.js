@@ -43,7 +43,14 @@ class App {
     
       this.$colorTooltip.addEventListener('mouseout', function() {
         this.style.display = 'none'; 
-      });
+      })
+
+      this.$colorTooltip.addEventListener('click', event => {
+        const color = event.target.dataset.color
+        if (color) {
+          this.editNoteColor(color)
+        }
+     })
      
       this.$form.addEventListener("submit", event => {
         event.preventDefault()
@@ -142,7 +149,14 @@ class App {
         note.id === Number(this.id) ? { ...note, title, text } : note
         );
         this.displayNotes()
-      }
+    }
+
+    editNoteColor(color) {
+      this.notes = this.notes.map(note => 
+        note.id === Number(this.id) ? { ...note, color } : note
+        );
+        this.displayNotes()
+    }
       
     selectNote(event) {
       const $selectedNote = event.target.closest(".note");
