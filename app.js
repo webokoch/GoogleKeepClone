@@ -26,6 +26,7 @@ class App {
         this.handleFormClick(event)
         this.selectNote(event)
         this.handleNoteClick(event)
+        this.deleteNote(event)
       })
 
       document.body.addEventListener('mouseover', event => {
@@ -103,6 +104,8 @@ class App {
     }
 
     handleNoteClick(event) {
+      if (event.target.matches('.toolbar-delete')) return
+      
       if (event.target.closest(".note")) {
         this.$modal.classList.toggle("open-modal")
         this.$modalTitle.value = this.title
@@ -157,19 +160,27 @@ class App {
         );
         this.displayNotes()
     }
+
+    deleteNote(event) {
+      event.stopPropagation();
+      if (!event.target.matches('.toolbar-delete')) return
+      const id = event.target.dataset.id
+      this.notes = this.notes.filter(note => note.id !== Number(id))
+      this.displayNotes()
+    }
       
     selectNote(event) {
-      const $selectedNote = event.target.closest(".note");
-      if (!$selectedNote) return;
-      const [$noteTitle, $noteText] = $selectedNote.children;
-      this.title = $noteTitle.innerText;
-      this.text = $noteText.innerText;
-      this.id = $selectedNote.dataset.id;
+      const $selectedNote = event.target.closest(".note")
+      if (!$selectedNote) return
+      const [$noteTitle, $noteText] = $selectedNote.children
+      this.title = $noteTitle.innerText
+      this.text = $noteText.innerText
+      this.id = $selectedNote.dataset.id
     }
 
     displayNotes() {
-      const hasNotes = this.notes.length > 0;
-      this.$placeholder.style.display = hasNotes ? "none" : "flex";
+      const hasNotes = this.notes.length > 0
+      this.$placeholder.style.display = hasNotes ? "none" : "flex"
 
       this.$notes.innerHTML = this.notes
       .map(
@@ -180,13 +191,13 @@ class App {
           <div class="toolbar-container">
               <div class="toolbar">
               <img class="toolbar-color" data-id="${note.id}" src="https://img.icons8.com/external-glyphons-amoghdesign/32/000000/external-color-education-vol-02-glyphons-amoghdesign.png"/>
-              <img class="toolbar-delete" src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png"/>
+              <img class="toolbar-delete" data-id="${note.id}" src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png"/>
               </div>
           </div>
           </div>
       `
       )
-      .join("");
+      .join("")
     }
 
   }
