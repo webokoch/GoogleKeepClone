@@ -35,7 +35,15 @@ class App {
 
       document.body.addEventListener('mouseout', event => {
         this.closeTooltip(event);  
-     });
+      })
+
+      this.$colorTooltip.addEventListener('mouseover', function() {
+        this.style.display = 'flex';  
+      })
+    
+      this.$colorTooltip.addEventListener('mouseout', function() {
+        this.style.display = 'none'; 
+      });
      
       this.$form.addEventListener("submit", event => {
         event.preventDefault()
