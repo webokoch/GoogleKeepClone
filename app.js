@@ -208,5 +208,5 @@ class App {
 
   }
   
-  new App()
+new App()
   
