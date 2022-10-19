@@ -5,17 +5,18 @@ class App {
         this.text = ''
         this.id = ''
 
-        this.$notes = document.querySelector("#notes-container");
+        this.$notes = document.querySelector("#notes-container")
         this.$form = document.querySelector("#form")
         this.$noteTitle = document.querySelector("#note-title")
         this.$noteText = document.querySelector("#note-text")
-        this.$placeholder = document.querySelector("#placeholder");
+        this.$placeholder = document.querySelector("#placeholder")
         this.$formButtons = document.querySelector("#form-buttons")
         this.$formCloseButton = document.querySelector("#form-close-button")
         this.$modal = document.querySelector(".modal")
-        this.$modalTitle = document.querySelector(".modal-title");
-        this.$modalText = document.querySelector(".modal-text");
-        this.$modalUpdateButton = document.querySelector('.modal-update-button');
+        this.$modalTitle = document.querySelector(".modal-title")
+        this.$modalText = document.querySelector(".modal-text")
+        this.$modalUpdateButton = document.querySelector('.modal-update-button')
+        this.$colorTooltip = document.querySelector('#color-tooltip')
   
       this.addEventListeners()
     }
@@ -27,14 +28,18 @@ class App {
         this.handleNoteClick(event)
       })
 
+      document.body.addEventListener('mouseover', event => {
+        this.openTooltip(event);  
+
+      });
+ 
       this.$form.addEventListener("submit", event => {
         event.preventDefault()
-        console.log(this)
-        const title = this.$noteTitle.value;
-        const text = this.$noteText.value;
-        const hasNote = title && text;
+        const title = this.$noteTitle.value
+        const text = this.$noteText.value
+        const hasNote = title && text
         if (hasNote) {
-          this.addNote({ title, text });
+          this.addNote({ title, text })
         }
       });
 
@@ -74,21 +79,31 @@ class App {
       this.$form.classList.remove("form-open")
       this.$noteTitle.style.display = "none"
       this.$formButtons.style.display = "none"
-      this.$noteTitle.value = "";
-      this.$noteText.value = "";
+      this.$noteTitle.value = ""
+      this.$noteText.value = ""
     }
 
     handleNoteClick(event) {
       if (event.target.closest(".note")) {
         this.$modal.classList.toggle("open-modal")
-        this.$modalTitle.value = this.title;
-        this.$modalText.value = this.text;
+        this.$modalTitle.value = this.title
+        this.$modalText.value = this.text
       }
     }
 
     updateNote(event) {
       this.editNote(); 
-      this.$modal.classList.toggle("open-modal");
+      this.$modal.classList.toggle("open-modal")
+   }
+
+   openTooltip(event) {
+      if (!event.target.matches('.toolbar-color')) return
+      this.id = event.target.dataset.id
+      const noteCoordinates = event.target.getBoundingClientRect()
+      const horizontal = noteCoordinates.left + window.scrollX
+      const vertical = noteCoordinates.top - window.scrollY
+      this.$colorTooltip.style.transform = `translate(${horizontal}px, ${vertical}px)`
+      this.$colorTooltip.style.display = 'flex'
    }
     
     addNote({ title, text }) {
@@ -133,7 +148,7 @@ class App {
           <div class="note-text">${note.text}</div>
           <div class="toolbar-container">
               <div class="toolbar">
-              <img class="toolbar=color" src="https://img.icons8.com/external-glyphons-amoghdesign/32/000000/external-color-education-vol-02-glyphons-amoghdesign.png"/>
+              <img class="toolbar-color" data-id="${note.id}" src="https://img.icons8.com/external-glyphons-amoghdesign/32/000000/external-color-education-vol-02-glyphons-amoghdesign.png"/>
               <img class="toolbar-delete" src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png"/>
               </div>
           </div>
