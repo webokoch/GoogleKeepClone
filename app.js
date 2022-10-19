@@ -1,6 +1,6 @@
 class App {
     constructor() {
-        this.notes = []
+        this.notes = JSON.parse(localStorage.getItem("notes")) || []
         this.title = ''
         this.text = ''
         this.id = ''
@@ -18,7 +18,9 @@ class App {
         this.$modalUpdateButton = document.querySelector('.modal-update-button')
         this.$colorTooltip = document.querySelector('#color-tooltip')
   
+      this.displayNotes()
       this.addEventListeners()
+
     }
   
     addEventListeners() {
@@ -105,7 +107,7 @@ class App {
 
     handleNoteClick(event) {
       if (event.target.matches('.toolbar-delete')) return
-      
+
       if (event.target.closest(".note")) {
         this.$modal.classList.toggle("open-modal")
         this.$modalTitle.value = this.title
@@ -198,7 +200,11 @@ class App {
       `
       )
       .join("")
+
+      const data = JSON.stringify(this.notes)
+      localStorage.setItem( "notes", data )
     }
+
 
   }
   
