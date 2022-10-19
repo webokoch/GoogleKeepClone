@@ -32,7 +32,11 @@ class App {
         this.openTooltip(event);  
 
       });
- 
+
+      document.body.addEventListener('mouseout', event => {
+        this.closeTooltip(event);  
+     });
+     
       this.$form.addEventListener("submit", event => {
         event.preventDefault()
         const title = this.$noteTitle.value
@@ -94,9 +98,9 @@ class App {
     updateNote(event) {
       this.editNote(); 
       this.$modal.classList.toggle("open-modal")
-   }
+    }
 
-   openTooltip(event) {
+    openTooltip(event) {
       if (!event.target.matches('.toolbar-color')) return
       this.id = event.target.dataset.id
       const noteCoordinates = event.target.getBoundingClientRect()
@@ -104,8 +108,13 @@ class App {
       const vertical = noteCoordinates.top - window.scrollY
       this.$colorTooltip.style.transform = `translate(${horizontal}px, ${vertical}px)`
       this.$colorTooltip.style.display = 'flex'
-   }
-    
+    }
+ 
+    closeTooltip(event) {
+      if (!event.target.matches('.toolbar-color')) return
+      this.$colorTooltip.style.display = 'none'
+    }
+  
     addNote({ title, text }) {
       const newNote = {
         title,
